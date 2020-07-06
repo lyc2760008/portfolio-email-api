@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require("path");
 
-// const sendGrid = require('@sendGrid/mail');
+const sendGrid = require('@sendGrid/mail');
 
 
 const app = express();
@@ -30,35 +30,35 @@ app.get('/api', (req, res, next) => {
 });
 
 
-// app.post('/api/email', (req, res, next) => {
+app.post('/api/email', (req, res, next) => {
 
-//     console.log(req.body);
+    console.log(req.body);
 
-//     sendGrid.setApiKey('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');
-//     const msg = {
-//         to: 'lyc2760008@163.com',
-//         from: req.body.email,
-//         subject: 'Website Contact',
-//         text: req.body.message
-//     }
+    sendGrid.setApiKey('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');
+    const msg = {
+        to: 'lyc2760008@163.com',
+        from: req.body.email,
+        subject: 'Website Contact',
+        text: req.body.message
+    }
 
-//     sendGrid.send(msg)
-//         .then(result => {
+    sendGrid.send(msg)
+        .then(result => {
 
-//             res.status(200).json({
-//                 success: true
-//             });
+            res.status(200).json({
+                success: true
+            });
 
-//         })
-//         .catch(err => {
+        })
+        .catch(err => {
 
-//             console.log('error: ', err);
-//             res.status(401).json({
-//                 success: false
-//             });
+            console.log('error: ', err);
+            res.status(401).json({
+                success: false
+            });
 
-//         });
-// });
+        });
+});
 
 if (process.env.NODE_ENV === "production") {
 
