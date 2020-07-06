@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require("path");
 
 const sendGrid = require('@sendGrid/mail');
 
@@ -17,6 +18,10 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
+});
+
+app.get('/', (req, res, next) => {
+    res.send('appppp Status: I\'m awesome')
 });
 
 
@@ -56,4 +61,8 @@ app.post('/api/email', (req, res, next) => {
 });
 
 
-app.listen(3030, '0.0.0.0');
+const port = process.env.PORT || 3030
+
+app.listen(port, () => {
+  console.log(`Server Listening on ${port}`)
+});
